@@ -1,0 +1,197 @@
+﻿@page
+@model MakebA_Final.Pages.RegisterModel
+@{
+    ViewData["Title"] = "Register";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MakebA_Final</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f4f7fa;
+        }
+
+        .form-container {
+            background-color: #ffffff;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-title {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .form-control {
+            border-radius: 10px;
+        }
+
+        .form-section {
+            margin-bottom: 20px;
+        }
+
+        .button-group {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 30px;
+        }
+
+        .button-group .btn {
+            width: 48%; /* ให้ปุ่มทั้งสองอยู่ในแถวเดียวกัน */
+            border-radius: 10px;
+            padding: 12px;
+        }
+
+        .back-to-home a {
+            text-decoration: none;
+            font-size: 16px;
+            color: #ffffff;
+            background-color: #6c757d; /* ปรับสีพื้นหลังเป็นสีเทา */
+            border: 2px solid #6c757d;
+            font-weight: bold;
+            transition: all 0.3s ease;
+        }
+
+        .back-to-home a:hover {
+            color: #ffffff;
+            background-color: #5a6268;
+            border-color: #545b62;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .btn-primary {
+            background-color: #007bff;
+            border-color: #007bff;
+        }
+
+        .btn-primary:hover {
+            background-color: #0056b3;
+            border-color: #004085;
+        }
+
+        .alert-success {
+            background-color: #d4edda;
+            color: #155724;
+            border-color: #c3e6cb;
+        }
+    </style>
+</head>
+<body>
+    <div class="container d-flex justify-content-center align-items-center" style="min-height: 100vh;">
+        <div class="col-md-6 form-container">
+            <h2 class="form-title">Create an Account</h2>
+
+            <!-- แสดงข้อความแจ้งเตือนเมื่อการลงทะเบียนสำเร็จ -->
+            @if (TempData["SuccessMessage"] != null)
+            {
+                <div class="alert alert-success" role="alert">
+                    @TempData["SuccessMessage"]
+                </div>
+            }
+
+            <!-- แสดงข้อผิดพลาดจาก ModelState -->
+            @if (!ModelState.IsValid)
+            {
+                <div class="alert alert-danger" role="alert">
+                    Please correct the errors below.
+                </div>
+            }
+
+            <form method="post">
+                <!-- First Name -->
+                <div class="form-section">
+                    <label for="firstName" class="form-label">First Name</label>
+                    <input type="text" class="form-control" id="firstName" name="Input.FirstName" value="@Model.Input.FirstName" required />
+                    @if (ModelState.ContainsKey("Input.FirstName") && ModelState["Input.FirstName"].Errors.Count > 0)
+                    {
+                        <div class="text-danger">@ModelState["Input.FirstName"].Errors[0].ErrorMessage</div>
+                    }
+                </div>
+
+                <!-- Last Name -->
+                <div class="form-section">
+                    <label for="lastName" class="form-label">Last Name</label>
+                    <input type="text" class="form-control" id="lastName" name="Input.LastName" value="@Model.Input.LastName" required />
+                    @if (ModelState.ContainsKey("Input.LastName") && ModelState["Input.LastName"].Errors.Count > 0)
+                    {
+                        <div class="text-danger">@ModelState["Input.LastName"].Errors[0].ErrorMessage</div>
+                    }
+                </div>
+
+                <!-- Username -->
+                <div class="form-section">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" name="Input.UserName" value="@Model.Input.UserName" required />
+                    @if (ModelState.ContainsKey("Input.UserName") && ModelState["Input.UserName"].Errors.Count > 0)
+                    {
+                        <div class="text-danger">@ModelState["Input.UserName"].Errors[0].ErrorMessage</div>
+                    }
+                </div>
+
+                <!-- Email -->
+                <div class="form-section">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" id="email" name="Input.Email" value="@Model.Input.Email" required />
+                    @if (ModelState.ContainsKey("Input.Email") && ModelState["Input.Email"].Errors.Count > 0)
+                    {
+                        <div class="text-danger">@ModelState["Input.Email"].Errors[0].ErrorMessage</div>
+                    }
+                </div>
+
+                <!-- Phone Number -->
+                <div class="form-section">
+                    <label for="phoneNumber" class="form-label">Phone Number</label>
+                    <input type="tel" class="form-control" id="phoneNumber" name="Input.PhoneNumber" value="@Model.Input.PhoneNumber" required />
+                    @if (ModelState.ContainsKey("Input.PhoneNumber") && ModelState["Input.PhoneNumber"].Errors.Count > 0)
+                    {
+                        <div class="text-danger">@ModelState["Input.PhoneNumber"].Errors[0].ErrorMessage</div>
+                    }
+                </div>
+
+                <!-- Department -->
+                <div class="form-section">
+                    <label for="department" class="form-label">Department</label>
+                    <select class="form-control" id="department" name="Input.Department">
+                        <option value="Sales Department 1" @(Model.Input.Department == "Sales Department 1" ? "selected" : "")>Sales Department 1</option>
+                        <option value="Sales Department 2" @(Model.Input.Department == "Sales Department 2" ? "selected" : "")>Sales Department 2</option>
+                        <option value="Sales Department 3" @(Model.Input.Department == "Sales Department 3" ? "selected" : "")>Sales Department 3</option>
+                        <option value="Inventory Department" @(Model.Input.Department == "Inventory Department" ? "selected" : "")>Inventory Department</option>
+                    </select>
+                </div>
+
+                <!-- Password -->
+                <div class="form-section">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" name="Input.Password" required />
+                </div>
+
+                <!-- Confirm Password -->
+                <div class="form-section">
+                    <label for="confirmPassword" class="form-label">Confirm Password</label>
+                    <input type="password" class="form-control" id="confirmPassword" name="Input.ConfirmPassword" required />
+                    @if (ModelState.ContainsKey("Input.ConfirmPassword") && ModelState["Input.ConfirmPassword"].Errors.Count > 0)
+                    {
+                        <div class="text-danger">@ModelState["Input.ConfirmPassword"].Errors[0].ErrorMessage</div>
+                    }
+                </div>
+
+                <!-- Register and Back Button Group -->
+                <div class="button-group">
+                    <a href="/" class="btn btn-secondary">Back to Home</a>
+                    <button type="submit" class="btn btn-primary">Register</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
