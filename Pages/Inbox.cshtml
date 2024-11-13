@@ -1,0 +1,99 @@
+﻿@page
+@model MakebA_Final.Pages.InboxModel
+@{
+    ViewData["Title"] = "Inbox";
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - MakebA_Final</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #e9ecef; /* สีพื้นหลังอ่อนของตัวเนื้อหา */
+        }
+
+        .sidebar {
+            background-color: #2b2f3a; /* สีเข้มสำหรับ Sidebar */
+            color: #fff;
+            padding: 20px;
+            height: 100vh;
+        }
+
+            .sidebar a {
+                color: #fff;
+                display: block;
+                padding: 10px;
+                margin-bottom: 10px;
+                text-decoration: none;
+                font-weight: bold;
+                border-radius: 5px;
+                background-color: #3a3f4b; /* สีเข้มเล็กน้อยสำหรับปุ่มลัด */
+            }
+
+                .sidebar a:hover {
+                    background-color: #495057; /* สีเทาเข้มขึ้นเมื่อ hover */
+                }
+
+        .content {
+            padding: 20px;
+            background-color: #ffffff; /* สีขาวสำหรับเนื้อหาหลัก */
+            border-radius: 8px;
+            box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1); /* เพิ่มเงาเพื่อแยกเนื้อหา */
+            margin-top: 20px;
+        }
+
+        .email-list .email-item {
+            background-color: #f8f9fa; /* สีพื้นหลังของแต่ละรายการอีเมล */
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 15px;
+        }
+
+            .email-list .email-item:hover {
+                background-color: #e2e6ea; /* สีอ่อนขึ้นเมื่อ hover */
+            }
+    </style>
+</head>
+<body>
+    <div class="container-fluid">
+        <div class="row">
+            <!-- Sidebar -->
+            <nav class="col-md-3 col-lg-2 d-md-block sidebar">
+                <div class="position-sticky">
+                    <h4>Quick Actions</h4>
+                    <a href="/Compose">✉️ Compose</a>
+                    <a href="/Inbox">📥 Inbox</a>
+                    <a href="/Sent">🚀 Sent Emails</a>
+                </div>
+            </nav>
+
+            <!-- Main content -->
+            <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4 content">
+                <h2>Inbox</h2>
+                <p>Welcome to your inbox, @User.Identity.Name!</p>
+
+                <!-- ตัวอย่างอีเมลในกล่องจดหมาย -->
+                <div class="email-list mt-4">
+                    <div class="email-item">
+                        <h5>Subject: Meeting Reminder</h5>
+                        <p>From: example@example.com</p>
+                        <p>Preview: Don’t forget about the meeting scheduled for tomorrow at 10 AM...</p>
+                    </div>
+                    <div class="email-item">
+                        <h5>Subject: Project Update</h5>
+                        <p>From: manager@example.com</p>
+                        <p>Preview: Here is the latest update on the project progress...</p>
+                    </div>
+                    <!-- เพิ่มรายการอีเมลเพิ่มเติมตามที่ต้องการ -->
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
