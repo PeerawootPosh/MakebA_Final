@@ -46,7 +46,6 @@
             margin-top: 20px;
         }
 
-        /* สไตล์สำหรับรายการอีเมลที่ส่งแล้ว */
         .email-list .email-item-sent {
             background-color: #d1e7dd; /* สีเขียวอ่อน */
             padding: 15px;
@@ -78,19 +77,16 @@
                 <h2>Sent Emails</h2>
                 <p>Here are your sent emails:</p>
 
-                <!-- ตัวอย่างรายการอีเมลที่ส่งแล้ว -->
                 <div class="email-list mt-4">
-                    <div class="email-item-sent">
-                        <h5>Subject: Follow Up</h5>
-                        <p>To: recipient@example.com</p>
-                        <p>Preview: This is a follow-up email regarding our last conversation...</p>
-                    </div>
-                    <div class="email-item-sent">
-                        <h5>Subject: Project Completion</h5>
-                        <p>To: team@example.com</p>
-                        <p>Preview: I'm happy to announce that our project has been completed successfully...</p>
-                    </div>
-                    <!-- เพิ่มรายการอีเมลเพิ่มเติมตามที่ต้องการ -->
+                    @foreach (var mail in Model.SentMails)
+                    {
+                        <div class="email-item-sent">
+                            <h5>Subject: @mail.Subject</h5>
+                            <p><strong>To:</strong> @mail.Receiver</p>
+                            <p><strong>Date:</strong> @mail.DateSent.ToString("MMMM dd, yyyy HH:mm")</p>
+                            <p><strong>Preview:</strong> @mail.Preview</p>
+                        </div>
+                    }
                 </div>
             </main>
         </div>

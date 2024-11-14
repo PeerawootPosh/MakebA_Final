@@ -1,37 +1,49 @@
-﻿using Microsoft.AspNetCore.Authentication;
-using Microsoft.AspNetCore.Identity;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Data.SqlClient;
 using System.Threading.Tasks;
 
 namespace MakebA_Final.Pages
 {
+    [Authorize]
     public class ProfileModel : PageModel
     {
-        private readonly SignInManager<IdentityUser> _signInManager;
+        private readonly string connectionString = "Server=tcp:mailsystem436.database.windows.net,1433;Initial Catalog=MailSystem;Persist Security Info=False;User ID=Final;Password=MakebA436;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+        // เปลี่ยนเป็น connection string ของคุณ
 
-        public ProfileModel(SignInManager<IdentityUser> signInManager)
+        [BindProperty]
+        public RegisterModel.InputModel Input { get; set; } = new RegisterModel.InputModel();
+
+        public async Task OnGetAsync()
         {
-            _signInManager = signInManager;
-        }
+            var username = User.Identity.Name;
 
-        // ข้อมูลผู้ใช้จำลอง
-        public string UserName { get; set; } = "John Doe";
-        public string Email { get; set; } = "johndoe@example.com";
-        public string DateJoined { get; set; } = "January 1, 2022";
+            using (var connection = new SqlConnection(connectionString))
+            {
+                await connection.OpenAsync();
+                var query = @"SELECT FirstName, LastName, Username, Email, PhoneNumber, Department
+                              FROM Users 
+                              WHERE Username = @Username";
 
-        public void OnGet()
-        {
-            // เพิ่มข้อมูลที่ต้องการแสดงในหน้า Profile
-        }
+                using (var command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Username", username);
 
-        // ฟังก์ชันสำหรับ Logout
-        public async Task<IActionResult> OnPostAsync()
-        {
-            // ออกจากระบบ
-            await _signInManager.SignOutAsync();
-            // เปลี่ยนเส้นทางไปที่หน้า Login
-            return RedirectToPage("/Login");
+                    using (var reader = await command.ExecuteReaderAsync())
+                    {
+                        if (await reader.ReadAsync())
+                        {
+                            Input.FirstName = reader["FirstName"].ToString();
+                            Input.LastName = reader["LastName"].ToString();
+                            Input.UserName = reader["Username"].ToString();
+                            Input.Email = reader["Email"].ToString();
+                            Input.PhoneNumber = reader["PhoneNumber"].ToString();
+                            Input.Department = reader["Department"].ToString();
+                        }
+                    }
+                }
+            }
         }
     }
 }

@@ -28,7 +28,6 @@
             }
 
                 .topbar a:hover {
-                    color: #cddc39;
                 }
 
         .content {
@@ -37,30 +36,28 @@
     </style>
 </head>
 <body>
-    <!-- ซ่อน Topbar เมื่ออยู่ในหน้า Home, Register, หรือ Login -->
-    @if (ViewData["Title"]?.ToString() != "Home" && ViewData["Title"]?.ToString() != "Register" && ViewData["Title"]?.ToString() != "Login")
-    {
-        <nav class="topbar">
-            <div>
-                <a href="/" class="navbar-brand text-white">MakebA_Final</a>
-            </div>
-            <div class="d-flex align-items-center">
-                @if (User.Identity.IsAuthenticated)
-                {
-                    <!-- เมนูสำหรับผู้ใช้ที่ล็อกอินแล้ว -->
-                    <a href="/Inbox">📥 Inbox</a>
-                    <a href="/Compose">✉️ Compose Email</a>
-                    <a href="/Sent">🚀 Sent Emails</a>
-                    <a href="/Profile">👤 Profile</a>
-                }
-                else
-                {
-                    <!-- เมนูสำหรับผู้ใช้ที่ยังไม่ได้ล็อกอิน -->
-                    <a href="/Login" class="text-primary">🔐 Login</a>
-                    <a href="/Register" class="text-primary">Register</a>
-                }
-            </div>
-        </nav>
+    <nav class="topbar">
+        <div>
+            <a href="/" class="navbar-brand text-white">MakebA_Final</a>
+        </div>
+        <div class="d-flex align-items-center">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <!-- เมนูสำหรับผู้ใช้ที่ล็อกอินแล้ว -->
+                <a href="/Inbox">📥 Inbox</a>
+                <a href="/Compose">✉️ Compose Email</a>
+                <a href="/Sent">🚀 Sent Emails</a>
+                <a href="/Profile">👤 Profile</a>
+              
+            }
+            else
+            {
+                <!-- เมนูสำหรับผู้ใช้ที่ยังไม่ได้ล็อกอิน -->
+                <a href="/Login" class="text-primary">🔐 Login</a>
+                <a href="/Register" class="text-primary">Register</a>
+            }
+        </div>
+    </nav>
     }
 
     <!-- Main content -->
