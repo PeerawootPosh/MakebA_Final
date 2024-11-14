@@ -75,7 +75,7 @@
         .btn-primary:hover {
             background-color: #0056b3;
             border-color: #004085;
-        }
+}
 
         .alert-success {
             background-color: #d4edda;
@@ -91,19 +91,19 @@
 
             <!-- แสดงข้อความแจ้งเตือนเมื่อการลงทะเบียนสำเร็จ -->
             @if (TempData["SuccessMessage"] != null)
-            {
+{
                 <div class="alert alert-success" role="alert">
                     @TempData["SuccessMessage"]
-                </div>
-            }
+    </div>
+}
 
             <!-- แสดงข้อผิดพลาดจาก ModelState -->
             @if (!ModelState.IsValid)
-            {
+{
                 <div class="alert alert-danger" role="alert">
                     Please correct the errors below.
-                </div>
-            }
+    </div>
+}
 
             <form method="post">
                 <!-- First Name -->
@@ -124,7 +124,7 @@
                     {
                         <div class="text-danger">@ModelState["Input.LastName"].Errors[0].ErrorMessage</div>
                     }
-                </div>
+        </div>
 
                 <!-- Username -->
                 <div class="form-section">
@@ -134,7 +134,7 @@
                     {
                         <div class="text-danger">@ModelState["Input.UserName"].Errors[0].ErrorMessage</div>
                     }
-                </div>
+        </div>
 
                 <!-- Email -->
                 <div class="form-section">
@@ -144,7 +144,7 @@
                     {
                         <div class="text-danger">@ModelState["Input.Email"].Errors[0].ErrorMessage</div>
                     }
-                </div>
+        </div>
 
                 <!-- Phone Number -->
                 <div class="form-section">
@@ -154,7 +154,7 @@
                     {
                         <div class="text-danger">@ModelState["Input.PhoneNumber"].Errors[0].ErrorMessage</div>
                     }
-                </div>
+        </div>
 
                 <!-- Department -->
                 <div class="form-section">
@@ -165,13 +165,13 @@
                         <option value="Sales Department 3" @(Model.Input.Department == "Sales Department 3" ? "selected" : "")>Sales Department 3</option>
                         <option value="Inventory Department" @(Model.Input.Department == "Inventory Department" ? "selected" : "")>Inventory Department</option>
                     </select>
-                </div>
+        </div>
 
                 <!-- Password -->
                 <div class="form-section">
                     <label for="password" class="form-label">Password</label>
                     <input type="password" class="form-control" id="password" name="Input.Password" required />
-                </div>
+        </div>
 
                 <!-- Confirm Password -->
                 <div class="form-section">
@@ -181,15 +181,16 @@
                     {
                         <div class="text-danger">@ModelState["Input.ConfirmPassword"].Errors[0].ErrorMessage</div>
                     }
-                </div>
+        </div>
 
                 <!-- Register and Back Button Group -->
                 <div class="button-group">
                     <a href="/" class="btn btn-secondary">Back to Home</a>
                     <button type="submit" class="btn btn-primary">Register</button>
-                </div>
-            </form>
         </div>
+        <button type="submit" class="btn btn-primary w-100">Register</button>
+    </form>
+</div>
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
